@@ -21,7 +21,7 @@ echo '<p> before key </p>';
 
 //$key = getProperty('key');
 
-$key = "foo"
+$key = "foo";
 
 echo '<p> after getproperty</p>';
 
