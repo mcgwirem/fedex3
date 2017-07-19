@@ -44,6 +44,8 @@ $request['WebAuthenticationDetail'] = array(
 	)
 );
 
+echo '<p> after request </p>';
+
 echo $request;
 
 /*
