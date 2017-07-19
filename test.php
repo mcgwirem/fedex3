@@ -14,7 +14,7 @@ require_once('/fedex-common.php5');
 
 //The WSDL is not included with the sample code.
 //Please include and reference in $path_to_wsdl variable.
-$path_to_wsdl = "../../wsdl/TrackService_v12.wsdl";
+$path_to_wsdl = "/wsdl/TrackService_v12.wsdl";
 
 ini_set("soap.wsdl_cache_enabled", "0");
 
