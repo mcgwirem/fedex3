@@ -4,7 +4,9 @@
 	<title></title>
 </head>
 <body>
-<?php echo '<p>Hello World</p>'?>
+<?php echo '<p>Hello World</p>'
+echo getProperty('key')
+?>
 <?php
 // Copyright 2009, FedEx Corporation. All rights reserved.
 // Version 6.0.0
@@ -30,8 +32,6 @@ $request['WebAuthenticationDetail'] = array(
 		'Password' => getProperty('password')
 	)
 );
-
-//echo '<p>AfterWebAuth</p>'
 
 $request['ClientDetail'] = array(
 	'AccountNumber' => getProperty('shipaccount'), 
