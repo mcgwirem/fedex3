@@ -17,13 +17,19 @@ require_once('/fedex-common.php5');
 //Please include and reference in $path_to_wsdl variable.
 $path_to_wsdl = "/wsdl/TrackService_v12.wsdl";
 
+echo '<p> before key </p>'
+
 $key = getProperty('key');
+
+echo '<p> after getproperty</p>'
 
 echo '<p>'$key'</p>';
 
-ini_set("soap.wsdl_cache_enabled", "0");
+echo '<p> after key </p>'
 
-$client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
+//ini_set("soap.wsdl_cache_enabled", "0");
+
+//$client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
 
 /*$request['WebAuthenticationDetail'] = array(
 	'ParentCredential' => array(
