@@ -31,7 +31,11 @@ echo '<p> after key </p>';
 
 ini_set("soap.wsdl_cache_enabled", "0");
 
+echo '<p> after init </p>';
+
 $client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
+
+echo '<p> after $client </p>';
 
 $request['WebAuthenticationDetail'] = array(
 	'ParentCredential' => array(
