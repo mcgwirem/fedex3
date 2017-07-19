@@ -19,9 +19,9 @@ $path_to_wsdl = "/wsdl/TrackService_v12.wsdl";
 
 echo '<p> before key </p>';
 
-//$key = getProperty('key');
+$key = getProperty('key');
 
-$key = "foo";
+//$key = "foo";
 
 echo '<p> after getproperty</p>';
 
