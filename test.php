@@ -4,15 +4,17 @@
 	<title></title>
 </head>
 <body>
-<?php echo '<p>Hello World</p>'
-echo getProperty('key')
-?>
+<?php echo '<p>Hello World</p>'?>
 <?php
 // Copyright 2009, FedEx Corporation. All rights reserved.
 // Version 6.0.0
 
 
 require_once('/fedex-common.php5');
+
+$key = getProperty('key');
+
+echo '<p>'getProperty('key')'</p>';
 
 //The WSDL is not included with the sample code.
 //Please include and reference in $path_to_wsdl variable.
