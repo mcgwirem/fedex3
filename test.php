@@ -8,22 +8,24 @@
 // Copyright 2009, FedEx Corporation. All rights reserved.
 // Version 6.0.0
 
-echo '<p>Hello World</p>'
+echo '<p>Hello World</p>';
 require_once('/fedex-common.php5');
 
-$key = getProperty('key');
 
-echo '<p>'getProperty('key')'</p>';
 
 //The WSDL is not included with the sample code.
 //Please include and reference in $path_to_wsdl variable.
 $path_to_wsdl = "/wsdl/TrackService_v12.wsdl";
 
-/*ini_set("soap.wsdl_cache_enabled", "0");
+$key = getProperty('key');
+
+echo '<p>'getProperty('key')'</p>';
+
+ini_set("soap.wsdl_cache_enabled", "0");
 
 $client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
 
-$request['WebAuthenticationDetail'] = array(
+/*$request['WebAuthenticationDetail'] = array(
 	'ParentCredential' => array(
 		'Key' => getProperty('parentkey'), 
 		'Password' => getProperty('parentpassword')
