@@ -17,15 +17,17 @@ require_once('/fedex-common.php5');
 //Please include and reference in $path_to_wsdl variable.
 $path_to_wsdl = "/wsdl/TrackService_v12.wsdl";
 
-echo '<p> before key </p>'
+echo '<p> before key </p>';
 
-$key = getProperty('key');
+//$key = getProperty('key');
 
-echo '<p> after getproperty</p>'
+$key = "foo"
+
+echo '<p> after getproperty</p>';
 
 echo '<p>'$key'</p>';
 
-echo '<p> after key </p>'
+echo '<p> after key </p>';
 
 //ini_set("soap.wsdl_cache_enabled", "0");
 
