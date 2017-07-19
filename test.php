@@ -9,7 +9,7 @@
 // Version 6.0.0
 
 echo '<p>Hello World</p>';
-require_once('/fedex-common.php5');
+/*require_once('/fedex-common.php5');
 
 
 
@@ -24,7 +24,7 @@ echo '<p>'$key'</p>';
 ini_set("soap.wsdl_cache_enabled", "0");
 
 $client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
-
+*/
 /*$request['WebAuthenticationDetail'] = array(
 	'ParentCredential' => array(
 		'Key' => getProperty('parentkey'), 
