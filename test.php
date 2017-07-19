@@ -25,7 +25,7 @@ $key = "foo"
 
 echo '<p> after getproperty</p>';
 
-echo '<p>'$key'</p>';
+echo $key;
 
 echo '<p> after key </p>';
 
