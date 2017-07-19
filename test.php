@@ -9,7 +9,7 @@
 // Version 6.0.0
 
 echo '<p>Hello World</p>';
-/*require_once('/fedex-common.php5');
+require_once('/fedex-common.php5');
 
 
 
