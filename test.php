@@ -9,7 +9,8 @@
 // Copyright 2009, FedEx Corporation. All rights reserved.
 // Version 6.0.0
 
-require_once('../../library/fedex-common.php5');
+
+require_once('/fedex-common.php5');
 
 //The WSDL is not included with the sample code.
 //Please include and reference in $path_to_wsdl variable.
