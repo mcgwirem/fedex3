@@ -94,7 +94,7 @@ try {
     writeToLog($client);    // Write to log file   
 } catch (SoapFault $exception) {
     printFault($exception, $client);
-}
-?>*/
+}*/
+?>
 </body>
 </html>
