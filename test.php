@@ -31,6 +31,8 @@ $request['WebAuthenticationDetail'] = array(
 	)
 );
 
+echo '<p>AfterWebAuth</p>'
+
 $request['ClientDetail'] = array(
 	'AccountNumber' => getProperty('shipaccount'), 
 	'MeterNumber' => getProperty('meter')
