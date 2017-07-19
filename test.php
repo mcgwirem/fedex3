@@ -19,7 +19,7 @@ $path_to_wsdl = "/wsdl/TrackService_v12.wsdl";
 
 $key = getProperty('key');
 
-echo '<p>'getProperty('key')'</p>';
+echo '<p>'$key'</p>';
 
 ini_set("soap.wsdl_cache_enabled", "0");
 
