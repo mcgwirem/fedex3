@@ -37,7 +37,7 @@ echo '<p> after init </p>';
 
 echo $path_to_wsdl;
 
-//$client = new SoapClient($path_to_wsdl, array('trace' => 1, "AccountNumer" = 1234, )); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
+$client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
 
 if (is_soap_fault($client)) {
 	echo '<p>error in soap</p>';
