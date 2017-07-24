@@ -1,4 +1,10 @@
-<?
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<?php
 //your account details here
 $key = 'gtFbRYRR2Yid6g66';
 $password = 'i9ftkkaHkvQzZd2Wafma1LJiP';
@@ -72,3 +78,7 @@ print 'Rate: $';
 print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
 print '<hr/>';
 print_r($result);
+?>
+</body>
+</html>
+
