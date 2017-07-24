@@ -43,6 +43,8 @@ $xml = '<?xml version="1.0" encoding="UTF-8"?>
 </ns1:RequestedPackageLineItems>
 </ns1:RequestedShipment></ns1:RateRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>';
 
+echo $xml;
+
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
@@ -52,6 +54,8 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
 $result_xml = curl_exec($ch);
+
+echo $result_xml;
 
 // remove colons and dashes to simplify the xml
 $result_xml = str_replace(array(':','-'), '', $result_xml);
