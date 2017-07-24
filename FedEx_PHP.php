@@ -60,7 +60,7 @@ $xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelop
 </soapenv:Envelope>';
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
+curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services/track');
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -76,7 +76,8 @@ $result = @simplexml_load_string($result_xml);
 print '<pre>';
 print 'Rate: $';
 //print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
-print (string) $result -> SOAPENVBody -> TrackReply -> CompletedTrackDetails -> TrackDetails;
+//print (string) $result -> SOAPENVBody -> TrackReply -> CompletedTrackDetails -> TrackDetails;
+print (string) $result -> SOAPENVBody -> TrackReply -> CompletedTrackDetails -> TrackDetails -> StatusDetail;
 print '<hr/>';
 print_r($result);
 ?>
