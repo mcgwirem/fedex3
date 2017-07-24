@@ -43,7 +43,7 @@ $xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelop
             <v12:CarrierCode>FDXE</v12:CarrierCode>
             <v12:PackageIdentifier>
                <v12:Type>'.$tracking_number.'</v12:Type>
-               <v12:Value>Input Your Information</v12:Value>
+               <v12:Value>'.$tracking_number.'</v12:Value>
             </v12:PackageIdentifier>
             <v12:ShipmentAccountNumber> Input Your Information</v12:ShipmentAccountNumber>
             <v12:SecureSpodAccount>Input Your Information</v12:SecureSpodAccount>
@@ -75,7 +75,8 @@ $result = @simplexml_load_string($result_xml);
 
 print '<pre>';
 print 'Rate: $';
-print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
+//print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
+print (string) $result -> SOAPENVBody -> TrackReply -> CompletedTrackDetails -> TrackDetails
 print '<hr/>';
 print_r($result);
 ?>
