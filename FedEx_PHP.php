@@ -5,7 +5,7 @@
 </head>
 <body>
 <?php
-//your account details here
+//account details
 $key = 'gtFbRYRR2Yid6g66';
 $password = 'i9ftkkaHkvQzZd2Wafma1LJiP';
 $account_number = '510087160';
@@ -60,7 +60,7 @@ $xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelop
 </soapenv:Envelope>';
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services/track');
+curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services/');
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
