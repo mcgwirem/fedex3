@@ -45,7 +45,7 @@ $xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelop
                <v12:Type>TRACKING_NUMBER_OR_DOORTAG</v12:Type>
                <v12:Value>'.$tracking_number.'</v12:Value>
             </v12:PackageIdentifier>
-            <v12:ShipmentAccountNumber> Input Your Information</v12:ShipmentAccountNumber>
+            <v12:ShipmentAccountNumber>'.$account_number.'</v12:ShipmentAccountNumber>
             <v12:SecureSpodAccount>Input Your Information</v12:SecureSpodAccount>
             <v12:Destination>
                <v12:StreetLines>Input Your Information</v12:StreetLines>
