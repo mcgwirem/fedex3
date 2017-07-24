@@ -47,14 +47,14 @@ $xml = '
                <v12:Type>TRACKING_NUMBER_OR_DOORTAG</v12:Type>
                <v12:Value>'.$tracking_number.'</v12:Value>
                </v12:PackageIdentifier>
-            </v12:ShipmentAccountNumber>
-            </v12:SecureSpodAccount>
             <v12:Destination>
                </v12:StreetLines>
                <v12:City>Texas</v12:City>
                <v12:StateOrProvinceCode>TX</v12:StateOrProvinceCode>
                <v12:PostalCode>73301</v12:PostalCode>
                <v12:CountryCode>US</v12:CountryCode>
+            </v12:Destination>
+         </v12:SelectionDetails>
       </v12:TrackRequest>
    </soapenv:Body>
 </soapenv:Envelope>';
