@@ -71,7 +71,7 @@ print '<pre>';
 print 'Rate: $';
 //print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
 //print (string) $result -> SOAPENVBody -> TrackReply -> CompletedTrackDetails -> TrackDetails;
-print (string) $result -> SOAPENVBody -> StatusDetail -> Description;
+print (string) $result->SOAPENVBody->StatusDetail->Description;
 print '<hr/>';
 print_r($result);
 ?>
