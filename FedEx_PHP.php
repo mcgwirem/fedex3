@@ -76,7 +76,7 @@ $result = @simplexml_load_string($result_xml);
 print '<pre>';
 print 'Rate: $';
 //print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
-print (string) $result -> SOAPENVBody -> TrackReply -> CompletedTrackDetails -> TrackDetails
+print (string) $result -> SOAPENVBody -> TrackReply -> CompletedTrackDetails -> TrackDetails;
 print '<hr/>';
 print_r($result);
 ?>
