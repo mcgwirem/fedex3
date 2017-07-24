@@ -7,7 +7,7 @@
 <?php
 //account details
 $key = 'gtFbRYRR2Yid6g66';
-$password = 'i9ftkkaHkvQzZd2Wafma1LJiP';
+$password = 'kTzaKCdTd5YF8rlWeDLHL4Nya';
 $account_number = '510087160';
 $meter_number = '100336990';
 $tracking_number = '377101283611590';
