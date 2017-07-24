@@ -10,9 +10,11 @@ $key = 'gtFbRYRR2Yid6g66';
 $password = 'i9ftkkaHkvQzZd2Wafma1LJiP';
 $account_number = '510087160';
 $meter_number = '100336990';
-$tracking_number = '123456789012';
+$tracking_number = '377101283611590';
 
-$xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v12="http://fedex.com/ws/track/v12">
+$xml = '
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v12="http://fedex.com/ws/track/v12">
   <soapenv:Header></soapenv:Header>
    <soapenv:Body>
       <v12:TrackRequest>
@@ -46,9 +48,9 @@ $xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelop
                <v12:Value>'.$tracking_number.'</v12:Value>
             </v12:PackageIdentifier>
             <v12:ShipmentAccountNumber>'.$account_number.'</v12:ShipmentAccountNumber>
-            <v12:SecureSpodAccount>Input Your Information</v12:SecureSpodAccount>
+            <v12:SecureSpodAccount></v12:SecureSpodAccount>
             <v12:Destination>
-               <v12:StreetLines>Input Your Information</v12:StreetLines>
+               <v12:StreetLines></v12:StreetLines>
                <v12:City>Texas</v12:City>
                <v12:StateOrProvinceCode>TX</v12:StateOrProvinceCode>
                <v12:PostalCode>73301</v12:PostalCode>
@@ -60,7 +62,7 @@ $xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelop
 </soapenv:Envelope>';
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services/');
+curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services/track/');
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
