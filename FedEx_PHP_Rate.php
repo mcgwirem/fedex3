@@ -1,10 +1,9 @@
-<?php
+<?
 //your account details here
-$key = 'gtFbRYRR2Yid6g66';
-$password = 'i9ftkkaHkvQzZd2Wafma1LJiP';
-$account_number = '510087160';
-$meter_number = '100336990';
-$tracking_number = 741234208628;
+$key = '';
+$password = '';
+$account_number = '';
+$meter_number = '';
 
 $xml = '<?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://fedex.com/ws/rate/v13"><SOAP-ENV:Body><ns1:RateRequest>
@@ -43,10 +42,8 @@ $xml = '<?xml version="1.0" encoding="UTF-8"?>
 </ns1:RequestedPackageLineItems>
 </ns1:RequestedShipment></ns1:RateRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>';
 
-echo $xml;
-
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services/');
+curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -54,8 +51,6 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
 $result_xml = curl_exec($ch);
-
-echo $result_xml;
 
 // remove colons and dashes to simplify the xml
 $result_xml = str_replace(array(':','-'), '', $result_xml);
@@ -66,4 +61,3 @@ print 'Rate: $';
 print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
 print '<hr/>';
 print_r($result);
-?>
