@@ -10,7 +10,7 @@ $key = 'gtFbRYRR2Yid6g66';
 $password = 'kTzaKCdTd5YF8rlWeDLHL4Nya';
 $account_number = '510087160';
 $meter_number = '100336990';
-$tracking_number = '377101283611590';
+$tracking_number = '122816215025810';
 
 $xml = '
 <?xml version="1.0" encoding="UTF-8"?>
@@ -48,14 +48,6 @@ $xml = '
                <v12:Value>'.$tracking_number.'</v12:Value>
             </v12:PackageIdentifier>
             <v12:ShipmentAccountNumber>'.$account_number.'</v12:ShipmentAccountNumber>
-            <v12:SecureSpodAccount></v12:SecureSpodAccount>
-            <v12:Destination>
-               <v12:StreetLines></v12:StreetLines>
-               <v12:City>Texas</v12:City>
-               <v12:StateOrProvinceCode>TX</v12:StateOrProvinceCode>
-               <v12:PostalCode>73301</v12:PostalCode>
-               <v12:CountryCode>US</v12:CountryCode>
-            </v12:Destination>
          </v12:SelectionDetails>
       </v12:TrackRequest>
    </soapenv:Body>
