@@ -11,35 +11,12 @@ $password = '3vo6fcxMhfN3ejYRBZPiESJTM';
 $account_number = '304955554';
 $meter_number = '111359514';
 $tracking_number = '741234208628';
-
-
 /*
-include(database_connect.php);
-
-$connectionInfo = 
-array(
-      "UID"=>$dbuser,
-      "PWD"=>$dbpswd,
-      "Database"=>$dbhost
-   );
-
-$conn = sqlsrv_connect($dbhost, $connectionInfo);
-
-$tsql = "SELECT IV_BOL from SHIPMENTS";
-
-$stmt = sqlsrv_query($conn, $tsql);
-
-if($stmt)
-{
-   echo "Statement executed. <br>\n";
-}
-else
-{
-   echo "Error in statement<br>\n";
-   die(print_r(sqlsrv_errors(), true));
-}
+$servername = '';
+$username = '';
+$password = '';
+$new_link = '';
 */
-
 
 $xml = '
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v12="http://fedex.com/ws/track/v12">
@@ -97,25 +74,12 @@ $result = @simplexml_load_string($result_xml);
 
 $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
 
-$deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
-
-$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateorTimestamp;
-
-if ($status <> 'Delivered') {
-   $estDeliveryDate
-}
-else
-{
-   $deliveryDate
-}
-
+//$deliveryDate = $result->SOAPENVBody->TrackReply->;
 
 //$pickupDate = $result->SOAPENVBody->TrackReply->;
 
 print '<pre>';
-print 'Status: '.$status.'<br>';
-print 'Delivery Date: '.$deliveryDate.'<br>';
-print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';
+print 'Status: '.$status;
 print '<hr/>';
 print_r($result);
 ?>

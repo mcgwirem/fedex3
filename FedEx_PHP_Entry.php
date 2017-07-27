@@ -4,13 +4,19 @@
 	<title></title>
 </head>
 <body>
+
+<form action="FedEx_PHP_Entry.php" method="POST">
+Enter Tracking Number: <input type="text" name="tnum"/>
+<input type="submit"/>
+</form>
+
 <?php
 //account details
 $key = 'LH9RgUjrvEqHHgaq';
 $password = '3vo6fcxMhfN3ejYRBZPiESJTM';
 $account_number = '304955554';
 $meter_number = '111359514';
-$tracking_number = '741234208628';
+$tracking_number = $_POST['tnum'];
 
 
 /*
@@ -97,20 +103,21 @@ $result = @simplexml_load_string($result_xml);
 
 $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
 
-$deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
+$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
 
-$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateorTimestamp;
 
-if ($status <> 'Delivered') {
-   $estDeliveryDate
+if ($status <> 'Delivered') 
+{
+   $deliveryDate = 'TBD';
+}
+elseif ($status = 'Delivered')
+{
+   $estDeliveryDate = '';
 }
 else
 {
-   $deliveryDate
+   $deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
 }
-
-
-//$pickupDate = $result->SOAPENVBody->TrackReply->;
 
 print '<pre>';
 print 'Status: '.$status.'<br>';

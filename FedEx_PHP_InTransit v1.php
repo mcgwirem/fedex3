@@ -4,13 +4,14 @@
 	<title></title>
 </head>
 <body>
+
 <?php
 //account details
 $key = 'LH9RgUjrvEqHHgaq';
 $password = '3vo6fcxMhfN3ejYRBZPiESJTM';
 $account_number = '304955554';
 $meter_number = '111359514';
-$tracking_number = '741234208628';
+$tracking_number = '741234216122';
 
 
 /*
@@ -97,25 +98,51 @@ $result = @simplexml_load_string($result_xml);
 
 $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
 
+$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
+
 $deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
 
-$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateorTimestamp;
-
-if ($status <> 'Delivered') {
-   $estDeliveryDate
-}
-else
+function deliv($var)
 {
-   $deliveryDate
+   if ($var == 'Delivered')
+   {
+      return $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
+   }
+   elseif ($var != 'Delivered') 
+   {
+      return 'TBD';
+   }
+   else
+   {
+      return 'Error';
+   }
+}
+
+function estDeliv($var)
+{
+   if ($var == 'Delivered')
+   {
+      return $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
+   }
+   elseif ($var != 'Delivered') 
+   {
+      return $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
+   }
+   else
+   {
+      return 'Error';
+   }
 }
 
 
-//$pickupDate = $result->SOAPENVBody->TrackReply->;
+$test = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
 
 print '<pre>';
+print 'Tracking Number: '.$tracking_number.'<br>';
 print 'Status: '.$status.'<br>';
-print 'Delivery Date: '.$deliveryDate.'<br>';
-print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';
+print 'Delivery Date: '.deliv($status).'<br>';
+print 'Estimated Delivery Date:  '.estDeliv($status).'<br>';
+print 'TEST: '.$test;
 print '<hr/>';
 print_r($result);
 ?>

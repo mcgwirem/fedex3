@@ -97,22 +97,26 @@ $result = @simplexml_load_string($result_xml);
 
 $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
 
-$deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
+$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
 
-$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateorTimestamp;
 
-if ($status <> 'Delivered') {
-   $estDeliveryDate
+if ($status <> 'Delivered') 
+{
+   $deliveryDate = 'TBD' && $estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
+}
+elseif ($status = 'Delivered')
+{
+   $estDeliveryDate = '' && $deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
 }
 else
 {
-   $deliveryDate
+   "ERROR";
 }
 
 
-//$pickupDate = $result->SOAPENVBody->TrackReply->;
 
 print '<pre>';
+print 'Tracking Number: '.$tracking_number.'<br>';
 print 'Status: '.$status.'<br>';
 print 'Delivery Date: '.$deliveryDate.'<br>';
 print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';

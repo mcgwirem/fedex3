@@ -62,3 +62,5 @@ print 'Rate: $';
 print (string) $result->SOAPENVBody->RateReply->RateReplyDetails->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount;
 print '<hr/>';
 print_r($result);
+
+TrackDetail->StatusDetail

@@ -4,42 +4,59 @@
 	<title></title>
 </head>
 <body>
+
 <?php
 //account details
 $key = 'LH9RgUjrvEqHHgaq';
 $password = '3vo6fcxMhfN3ejYRBZPiESJTM';
 $account_number = '304955554';
 $meter_number = '111359514';
+//intransit
+//$tracking_number = '741234216122';
+//delivered
 $tracking_number = '741234208628';
 
 
-/*
+
 include(database_connect.php);
 
-$connectionInfo = 
-array(
-      "UID"=>$dbuser,
-      "PWD"=>$dbpswd,
-      "Database"=>$dbhost
-   );
-
-$conn = sqlsrv_connect($dbhost, $connectionInfo);
-
-$tsql = "SELECT IV_BOL from SHIPMENTS";
-
-$stmt = sqlsrv_query($conn, $tsql);
-
-if($stmt)
-{
-   echo "Statement executed. <br>\n";
+// PHP Data Objects(PDO) Sample Code:
+/*
+try {
+    $conn = new PDO($dbhost, $dbuser, $dbpswd);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
-else
-{
-   echo "Error in statement<br>\n";
-   die(print_r(sqlsrv_errors(), true));
+catch (PDOException $e) {
+    print("Error connecting to SQL Server.");
+    die(print_r($e));
 }
 */
+/*$connectionInfo = array("UID" => $dbuserserver, "pwd" => $dbpswd, "Database" => "testDB", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$serverName = "tcp:travismathew-analytics-database1.database.windows.net,1433";
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
+if($conn === false)
+{
+   die(print_r(sqlsrv_errors(), true));
+}
+
+$sql = "SELECT count(IV_BOL) from SHIPMENTS;";
+
+$stmt = sqlsrv_query($conn, $sql);
+
+if($stmt === false)
+{
+   die(print_r(sqlsrv_errors (), true));
+}
+
+echo "the stmt";
+
+echo $stmt;
+
+sqlsrv_free_stmt($stmt);
+
+sqlsrv_close($conn);
+*/
 
 $xml = '
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v12="http://fedex.com/ws/track/v12">
@@ -95,29 +112,57 @@ $result_xml = curl_exec($ch);
 $result_xml = str_replace(array(':','-'), '', $result_xml);
 $result = @simplexml_load_string($result_xml);
 
+
 $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
 
-$deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
+$eDT = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
 
-$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateorTimestamp;
+$dd = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
 
-if ($status <> 'Delivered') {
-   $estDeliveryDate
+$pickup = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[1]->DateOrTimestamp;
+
+/*
+function insertInTo($var1, $var2, $var3, $var4, $var5, $var6)
+{
+
+}
+*/
+
+if ($status == 'Delivered') 
+{
+   $shp_bol = $tracking_number;
+   $shp_del_dt = $dd;
+   $shp_pickup_dt = $pickup;
+   $shp_sts = $status;
+   $shp_eta_dt = $eDT;
+   $shp_is_complete = 1;
+
+   print '<pre>';
+   print 'Tracking Number: '.$shp_bol.'<br>';
+   print 'Status: '.$shp_sts.'<br>';
+   print 'Delivery Date: '.$shp_del_dt.'<br>';
+   print 'Estimated Delivery Date:  '.$shp_eta_dt.'<br>';
+   print '<hr/>';
+   print_r($result);
 }
 else
 {
-   $deliveryDate
+   $shp_bol = $tracking_number;
+   $shp_del_dt = null;
+   $shp_pickup_dt = $pickup;
+   $shp_sts = $status;
+   $shp_eta_dt = $eDT;
+   $shp_is_complete = 1;
+
+   print '<pre>';
+   print 'Tracking Number: '.$tracking_number.'<br>';
+   print 'Status: '.$shp_sts.'<br>';
+   print 'Delivery Date: '.$shp_del_dt.'<br>';
+   print 'Estimated Delivery Date:  '.$shp_eta_dt.'<br>';
+   print '<hr/>';
+   print_r($result);
 }
 
-
-//$pickupDate = $result->SOAPENVBody->TrackReply->;
-
-print '<pre>';
-print 'Status: '.$status.'<br>';
-print 'Delivery Date: '.$deliveryDate.'<br>';
-print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';
-print '<hr/>';
-print_r($result);
 ?>
 </body>
 </html>

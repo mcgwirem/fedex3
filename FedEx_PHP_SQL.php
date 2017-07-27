@@ -4,41 +4,11 @@
 	<title></title>
 </head>
 <body>
+
 <?php
-//account details
-$key = 'LH9RgUjrvEqHHgaq';
-$password = '3vo6fcxMhfN3ejYRBZPiESJTM';
-$account_number = '304955554';
-$meter_number = '111359514';
-$tracking_number = '741234208628';
+include(database_connect_v2.php);
 
 
-/*
-include(database_connect.php);
-
-$connectionInfo = 
-array(
-      "UID"=>$dbuser,
-      "PWD"=>$dbpswd,
-      "Database"=>$dbhost
-   );
-
-$conn = sqlsrv_connect($dbhost, $connectionInfo);
-
-$tsql = "SELECT IV_BOL from SHIPMENTS";
-
-$stmt = sqlsrv_query($conn, $tsql);
-
-if($stmt)
-{
-   echo "Statement executed. <br>\n";
-}
-else
-{
-   echo "Error in statement<br>\n";
-   die(print_r(sqlsrv_errors(), true));
-}
-*/
 
 
 $xml = '
@@ -48,13 +18,13 @@ $xml = '
       <v12:TrackRequest>
          <v12:WebAuthenticationDetail>
  <v12:UserCredential>
-               <v12:Key>'.$key.'</v12:Key>
-               <v12:Password>'.$password.'</v12:Password>
+               <v12:Key>'.fe_key.'</v12:Key>
+               <v12:Password>'.fe_pswd.'</v12:Password>
             </v12:UserCredential>
          </v12:WebAuthenticationDetail>
          <v12:ClientDetail>
-            <v12:AccountNumber>'.$account_number.'</v12:AccountNumber>
-            <v12:MeterNumber>'.$meter_number.'</v12:MeterNumber>
+            <v12:AccountNumber>'.fe_acct.'</v12:AccountNumber>
+            <v12:MeterNumber>'.fe_meter.'</v12:MeterNumber>
             <v12:Localization>
                <v12:LanguageCode>EN</v12:LanguageCode>
                <v12:LocaleCode>US</v12:LocaleCode>
@@ -95,29 +65,55 @@ $result_xml = curl_exec($ch);
 $result_xml = str_replace(array(':','-'), '', $result_xml);
 $result = @simplexml_load_string($result_xml);
 
+
 $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
 
-$deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
+$eDT = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
 
-$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateorTimestamp;
+$dd = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
 
-if ($status <> 'Delivered') {
-   $estDeliveryDate
+$pickup = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[1]->DateOrTimestamp;
+
+
+if ($status == 'Delivered') 
+{
+   $shp_bol = $tracking_number;
+   $shp_del_dt = $dd;
+   $shp_pickup_dt = $pickup;
+   $shp_sts = $status;
+   $shp_eta_dt = $eDT;
+   $shp_is_complete = 1;
+
+   /*
+   print '<pre>';
+   print 'Tracking Number: '.$shp_bol.'<br>';
+   print 'Status: '.$shp_sts.'<br>';
+   print 'Delivery Date: '.$shp_del_dt.'<br>';
+   print 'Estimated Delivery Date:  '.$shp_eta_dt.'<br>';
+   print '<hr/>';
+   print_r($result);
+   */
 }
 else
 {
-   $deliveryDate
+   $shp_bol = $tracking_number;
+   $shp_del_dt = null;
+   $shp_pickup_dt = $pickup;
+   $shp_sts = $status;
+   $shp_eta_dt = $eDT;
+   $shp_is_complete = 1;
+
+   /*
+   print '<pre>';
+   print 'Tracking Number: '.$tracking_number.'<br>';
+   print 'Status: '.$shp_sts.'<br>';
+   print 'Delivery Date: '.$shp_del_dt.'<br>';
+   print 'Estimated Delivery Date:  '.$shp_eta_dt.'<br>';
+   print '<hr/>';
+   print_r($result);
+   */
 }
 
-
-//$pickupDate = $result->SOAPENVBody->TrackReply->;
-
-print '<pre>';
-print 'Status: '.$status.'<br>';
-print 'Delivery Date: '.$deliveryDate.'<br>';
-print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';
-print '<hr/>';
-print_r($result);
 ?>
 </body>
 </html>

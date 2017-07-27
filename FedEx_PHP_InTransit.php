@@ -4,13 +4,15 @@
 	<title></title>
 </head>
 <body>
+
 <?php
 //account details
 $key = 'LH9RgUjrvEqHHgaq';
 $password = '3vo6fcxMhfN3ejYRBZPiESJTM';
 $account_number = '304955554';
 $meter_number = '111359514';
-$tracking_number = '741234208628';
+//intransit
+//$tracking_number = '741234216122';
 
 
 /*
@@ -95,29 +97,92 @@ $result_xml = curl_exec($ch);
 $result_xml = str_replace(array(':','-'), '', $result_xml);
 $result = @simplexml_load_string($result_xml);
 
+/*
 $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
+
+$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
 
 $deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
 
-$estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateorTimestamp;
+function deliv($var)
+{
+   if ($var == 'Delivered')
+   {
+      return $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
+   }
+   elseif ($var != 'Delivered') 
+   {
+      return 'TBD';
+   }
+   else
+   {
+      return 'Error';
+   }
+}
 
-if ($status <> 'Delivered') {
-   $estDeliveryDate
+function estDeliv($var)
+{
+   if ($var == 'Delivered')
+   {
+      return $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
+   }
+   elseif ($var != 'Delivered') 
+   {
+      return $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
+   }
+   else
+   {
+      return 'Error';
+   }
+}
+*/
+
+if ($status == 'Delivered') 
+{
+   $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
+
+   $estDeliveryDate = '';
+
+   $deliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
+
+   print '<pre>';
+   print 'Tracking Number: '.$tracking_number.'<br>';
+   print 'Status: '.$status.'<br>';
+   print 'Delivery Date: '.$deliveryDate.'<br>';
+   print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';
+   print '<hr/>';
+   print_r($result);
 }
 else
 {
-   $deliveryDate
+   $status = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->Description;
+
+   $estDeliveryDate = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
+
+   $deliveryDate = 'TBD';
+   print '<pre>';
+   print 'Tracking Number: '.$tracking_number.'<br>';
+   print 'Status: '.$status.'<br>';
+   print 'Delivery Date: '.$deliveryDate.'<br>';
+   print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';
+   print '<hr/>';
+   print_r($result);
 }
 
+$test = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->DatesOrTimes[0]->DateOrTimestamp;
 
-//$pickupDate = $result->SOAPENVBody->TrackReply->;
+echo 'test'.$test;
 
+/*
 print '<pre>';
+print 'Tracking Number: '.$tracking_number.'<br>';
 print 'Status: '.$status.'<br>';
-print 'Delivery Date: '.$deliveryDate.'<br>';
-print 'Estimated Delivery Date:  '.$estDeliveryDate.'<br>';
+print 'Delivery Date: '.deliv($status).'<br>';
+print 'Estimated Delivery Date:  '.estDeliv($status).'<br>';
+print 'TEST: '.$test;
 print '<hr/>';
 print_r($result);
+*/
 ?>
 </body>
 </html>
