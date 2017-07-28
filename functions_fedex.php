@@ -1,5 +1,33 @@
 <?php
+/****************************************** COUNTER  ***************************************/
+function counterThing()
+{
+	$sum = 0;
+	foreach ($group as $key=>$value)
+	{
+		$sum += $value;
+	}
+	return $sum;
+}
+
+/************************************** MESSAGE STORAGE ***************************************/
+/*function arrayStorage($var1, $var2)
+{
+	$concat = $var1.','.$var2;
+	$array = array();
+	$array[] = $concat;
+	return $array[];
+}
+*/
+
 /*******************************************FUNCTIONS********************************************/
+
+function clean($string)
+{
+	$string = str_replace(' ', '', $string);
+	return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+	//return preg_replace('/[0-9]*$/', '', $string);
+}
 
 /************************UPDATE FUNCTION**************************/
 function updatedDB ($var1, $var2, $var3, $var4, $var5, $var6)
@@ -23,14 +51,36 @@ function updatedDB ($var1, $var2, $var3, $var4, $var5, $var6)
 	//check if the query was a success
 	if ($stmtU->rowCount())
 	{
-		echo 'success';
+		var_dump($var1).'<br>';
+		echo 'success<br>';
+		//$statusMessage = 'Success';
+		//arrayStorage($statusMessage, $var1);
+		/*$i = 0;
+		foreach($count as $success)
+		{
+			i++;
+			$success[number];
+		}*/
 	}
 	else
 	{
-		echo 'failure';
+		var_dump($var1).'<br>';
+		echo 'failure<br>';
+		//$statusMessage = 'Failure';
+		//arrayStorage($statusMessage, $var1);
+		/*$i = 0;
+		foreach($count as $failures)
+		{
+			i++;
+			$failures[number];
+		}*/
+		echo counterThing();
+		//IS THIS RIGHT?
+		continue;
 	}
 	$stmtU = null;
 	$conn = null;	
+	//return array($success, $failures);
 }
 
 /************************STRING TO DATE FUNCTION**************************/
@@ -50,6 +100,8 @@ function foo (&$array, $var1)
 		{
 			//store the tracking number in this variable
 			$trkNum = $array[$i][$var1];
+
+			//clean($trkNum);
 			
 			//xml to pass to fedex
 			$xml = '
@@ -118,7 +170,7 @@ function foo (&$array, $var1)
 			//store delivery date
 			$dd = $result->SOAPENVBody->TrackReply->CompletedTrackDetails->TrackDetails->StatusDetail->CreationTime;
 
-			//reforat delivery date
+			//reformat delivery date
 			$dd = stringToDate($dd);
 
 			//store pickup date
@@ -148,11 +200,11 @@ function foo (&$array, $var1)
 			//if status is delivered then return the following to update query
 			elseif ($status == 'Delivered') 
 			{
-			   $shp_bol = $tracking_number;
+			   $shp_bol = $trkNum;
 			   $shp_del_dt = $dd;
 			   $shp_pickup_dt = $pickup;
 			   $shp_sts = $status;
-			   $shp_eta_dt = $eDT;
+			   $shp_eta_dt = null;
 			   $shp_is_complete = 1;
 
 			   //call update query function
@@ -163,12 +215,12 @@ function foo (&$array, $var1)
 			//then return the following to the database
 			else
 			{
-			   $shp_bol = $tracking_number;
+			   $shp_bol = $trkNum;
 			   $shp_del_dt = null;
 			   $shp_pickup_dt = $pickup;
 			   $shp_sts = $status;
 			   $shp_eta_dt = $eDT;
-			   $shp_is_complete = 0;
+			   $shp_is_complete = 2;
 
 			   //call update query function
 			   updatedDB($shp_bol, $shp_del_dt, $shp_pickup_dt, $shp_sts, $shp_eta_dt, $shp_is_complete);

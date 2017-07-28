@@ -1,0 +1,5 @@
+For Windows:
+      * Jump to definition = ``Alt+Click``
+      * Jump to definition = ``Control+Windows+Alt+Up``
+      * Go back = ``Control+Windows+Alt+Left``
+      * Manual CodeIntel = ``Control+Shift+space``

@@ -16,7 +16,7 @@ catch (PDOException $e)
 }
 
 //loop through the database and store in array
-foreach ($conn->query("SELECT TOP 2 SHP_BOL FROM SHIP_FedEx WHERE SHP_IS_COMPLETE != 1") as $row){
+foreach ($conn->query("SELECT TOP 5 SHP_BOL FROM SHIP_FedEx WHERE SHP_IS_COMPLETE != 1 AND SHP_BOL LIKE '7%'") as $row){
 	$data[]=$row;
 }
 
@@ -24,8 +24,12 @@ foreach ($conn->query("SELECT TOP 2 SHP_BOL FROM SHIP_FedEx WHERE SHP_IS_COMPLET
 $colName = 'SHP_BOL';
 
 //main function to do xml and update work
+//reference functions_fedex.php to see actual code
 foo($data, $colName);
 
+var_dump($failures).'<br>';
+var_dump($success).'<br>';
 //close the connection
 $conn = null;
+//var_dump(arrayStoreage());
 ?>

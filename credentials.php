@@ -1,6 +1,6 @@
 <?php
-define('db_user', 'mmcgwire');
-define('db_pswd', '5WOPLjwie$6QZI^B04fw19MafyTcd#ozVhW*');
+define('db_user', 'bi_dev');
+define('db_pswd', '00VKHTxz^K9D$h6p7!E2@bqkXPxbI$g&bJtW');
 define('db_host', 'travismathew-analytics-database1.database.windows.net');
 define('db_name', 'testDB');
 define('fe_key', 'LH9RgUjrvEqHHgaq');
