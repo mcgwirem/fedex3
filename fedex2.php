@@ -6,15 +6,6 @@
 <body>
 <?php
 //account details
-$key = 'LH9RgUjrvEqHHgaq';
-$password = '3vo6fcxMhfN3ejYRBZPiESJTM';
-$account_number = '304955554';
-$meter_number = '111359514';
-$tracking_number = '741234208628';
-$servername = '';
-$username = '';
-$password = '';
-$new_link = '';
 
 
 $xml = '
