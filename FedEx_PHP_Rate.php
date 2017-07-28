@@ -1,10 +1,5 @@
 <?
 //your account details here
-$key = 'gtFbRYRR2Yid6g66';
-$password = 'kTzaKCdTd5YF8rlWeDLHL4Nya';
-$account_number = '510087160';
-$meter_number = '100336990';
-$tracking_number = '122816215025810';
 
 $xml = '<?xml version="1.0" encoding="UTF-8"?>
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://fedex.com/ws/rate/v13"><SOAP-ENV:Body><ns1:RateRequest>
